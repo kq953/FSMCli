@@ -56,14 +56,14 @@ func main() {
 		case ev := <-w.Events:
 			{
 				mustSend := false
-				fmt.Print(time.Now().Format("2006-01-02 15:04:05"), "\t")
+				//fmt.Print(time.Now().Format("\n2006-01-02 15:04:05"), "\t")
 				if ev.Op&fsnotify.Create == fsnotify.Create {
 					//文件创建
 					//fmt.Println(ev.Name, "created!!")
 					//判断是否是文件夹
 					info, err := os.Stat(ev.Name)
 					if err != nil {
-						fmt.Println(err)
+						//fmt.Println(err)
 					} else {
 						//如果是文件夹 添加到侦听列表
 						if info.IsDir() {
@@ -90,7 +90,7 @@ func main() {
 					match, _ := regexp.MatchString(`~$`, ev.Name)
 					if match {
 						mustSend = false
-						fmt.Println("临时文件 忽略!!")
+						//fmt.Println("临时文件 忽略!!")
 					}
 				}
 
@@ -104,10 +104,10 @@ func main() {
 					if len(pro) > 2 {
 						sendChan <- string([]rune(pro)[1 : len([]rune(pro))-1])
 					} else {
-						fmt.Println("项目名称获取错误")
+						//fmt.Println("项目名称获取错误")
 					}
 				} else {
-					fmt.Println("忽略重启")
+					//fmt.Println("忽略重启")
 				}
 			}
 		case err := <-w.Errors:
